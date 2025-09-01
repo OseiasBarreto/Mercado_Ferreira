@@ -1,18 +1,29 @@
-//aqui é o funciinario que guarda os produtos e sabe onde estão e segue as ordens do gerente
-//o gerente chamado ProdutoService
-
 package com.example.Produtos.repository;
+
 import com.example.Produtos.model.Produto;
 import org.springframework.data.jpa.repository.JpaRepository;
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.util.List;
 
-public interface    ProdutoRepository extends JpaRepository<Produto, Long> {
-String findByNome(String nome);
-String findbyDescricao(String descricao);
-String findByCategoria(String categoria);
-String findByPreco(double preco);
-String findByQuantidadeEstoque(int quantidadeEstoque);
-String findByMarca(String marca);
-String findByModelo(String modelo);
-String findByCor(String cor);
+public interface ProdutoRepository extends JpaRepository<Produto, Long> {
+
+    Produto findByNome(String nome);
+
+    List<Produto> findByDescricao(String descricao);
+
+    List<Produto> findByCategoria(String categoria);
+
+    List<Produto> findByPreco(BigDecimal preco);
+
+    List<Produto> findByQuantidade(int quantidade);
+
+    List<Produto> findByDataDeChegada(LocalDateTime dataDeChegada);
+
+    List<Produto> findByFornecedor(String fornecedor);
+
+
+
+
 
 }

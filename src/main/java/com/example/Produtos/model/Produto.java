@@ -1,35 +1,34 @@
 package com.example.Produtos.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
-
-
+import java.time.LocalDate;
 
 @Entity
 public class Produto {
 
     @Id
-    @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String nome;
     private BigDecimal preco;
     private int quantidade;
-    private LocalDateTime dataDeChegada;
+
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private LocalDate dataDeChegada;
+
     private String fornecedor;
     private String categoria;
     private String descricao;
 
-
-    //construtor vazio
-    public Produto(){
-
+    public Produto() {
     }
 
-    //construtor com todos os campos
-    public Produto(String nome, BigDecimal preco, int quantidade, LocalDateTime dataDeChegada, String fornecedor, String categoria, String descricao) {
+    public Produto(String nome, BigDecimal preco, int quantidade, LocalDate dataDeChegada,
+                   String fornecedor, String categoria, String descricao) {
         this.nome = nome;
         this.preco = preco;
         this.quantidade = quantidade;
@@ -71,11 +70,11 @@ public class Produto {
         this.quantidade = quantidade;
     }
 
-    public LocalDateTime getDataDeChegada() {
+    public LocalDate getDataDeChegada() {
         return dataDeChegada;
     }
 
-    public void setDataDeChegada(LocalDateTime dataDeChegada) {
+    public void setDataDeChegada(LocalDate dataDeChegada) {
         this.dataDeChegada = dataDeChegada;
     }
 

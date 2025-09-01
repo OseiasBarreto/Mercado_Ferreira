@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard de Produtos</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- CSS Personalizado -->
+    <link rel="stylesheet" href="css.css">
+</head>
+<body>
+<div class="container-fluid my-4">
+    <h1 class="text-center mb-4 text-primary">Dashboard de Produtos</h1>
+
+    <!-- Mini-dashboard -->
+    <div class="row text-center mb-4" id="mini-dashboard">
+        <div class="col-lg-3 col-md-6 mb-3">
+            <div class="card bg-primary text-white shadow-sm h-100">
+                <div class="card-body">
+                    <i class="fa-solid fa-box fa-2x mb-2"></i>
+                    <h4 id="totalProducts">0</h4>
+                    <p>Total de Produtos</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6 mb-3">
+            <div class="card bg-success text-white shadow-sm h-100">
+                <div class="card-body">
+                    <i class="fa-solid fa-layer-group fa-2x mb-2"></i>
+                    <h4 id="totalQuantity">0</h4>
+                    <p>Quantidade Total</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6 mb-3">
+            <div class="card bg-warning text-white shadow-sm h-100">
+                <div class="card-body">
+                    <i class="fa-solid fa-tags fa-2x mb-2"></i>
+                    <h4 id="totalCategories">0</h4>
+                    <p>Categorias</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6 mb-3">
+            <div class="card bg-danger text-white shadow-sm h-100">
+                <div class="card-body">
+                    <i class="fa-solid fa-triangle-exclamation fa-2x mb-2"></i>
+                    <h4 id="lowStock">0</h4>
+                    <p>Produtos em Baixa</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cards de produtos -->
+    <div class="row mb-4" id="cardsContainer"></div>
+
+    <!-- Controles -->
+    <div class="row mb-3">
+        <div class="col-lg-6 mb-2">
+            <input type="text" id="search" class="form-control" placeholder="Pesquisar produtos ou fornecedores...">
+        </div>
+        <div class="col-lg-3 mb-2">
+            <select id="categoryFilter" class="form-select">
+                <option value="">Todas as categorias</option>
+                <option value="Bebidas">Bebidas</option>
+                <option value="Lanches">Lanches</option>
+                <option value="Sobremesas">Sobremesas</option>
+                <option value="Acessórios">Acessórios</option>
+            </select>
+        </div>
+        <div class="col-lg-3 mb-2 d-flex gap-2">
+            <button id="exportCSV" class="btn btn-outline-primary flex-fill"><i class="fa-solid fa-file-csv me-1"></i>CSV</button>
+            <button id="exportPDF" class="btn btn-outline-success flex-fill"><i class="fa-solid fa-file-pdf me-1"></i>PDF</button>
+        </div>
+    </div>
+
+    <!-- Tabela -->
+    <div class="table-responsive mb-3" style="height: 60vh;">
+        <table class="table table-striped table-hover table-bordered" id="productTable">
+            <thead class="table-primary sticky-top">
+            <tr>
+                <th data-column="0" data-order="desc">ID &#x25B2;</th>
+                <th data-column="1" data-order="desc">Nome &#x25B2;</th>
+                <th data-column="2" data-order="desc">Preço &#x25B2;</th>
+                <th data-column="3" data-order="desc">Quantidade &#x25B2;</th>
+                <th data-column="4" data-order="desc">Data de Chegada &#x25B2;</th>
+                <th data-column="5" data-order="desc">Fornecedor &#x25B2;</th>
+                <th data-column="6" data-order="desc">Categoria &#x25B2;</th>
+                <th data-column="7" data-order="desc">Descrição &#x25B2;</th>
+            </tr>
+            </thead>
+            <tbody id="tableBody"></tbody>
+        </table>
+    </div>
+
+    <!-- Paginação -->
+    <div class="d-flex justify-content-center mb-4">
+        <button id="prevPage" class="btn btn-outline-secondary me-2">Anterior</button>
+        <span id="pageInfo" class="align-self-center">Página 1</span>
+        <button id="nextPage" class="btn btn-outline-secondary ms-2">Próxima</button>
+    </div>
+
+    <!-- Gráficos -->
+    <div class="row">
+        <div class="col-lg-6 mb-3">
+            <div class="card shadow-sm h-100">
+                <div class="card-body">
+                    <h5 class="card-title text-center">Quantidade por Categoria</h5>
+                    <canvas id="barChart"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6 mb-3">
+            <div class="card shadow-sm h-100">
+                <div class="card-body">
+                    <h5 class="card-title text-center">Distribuição de Categorias</h5>
+                    <canvas id="pieChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
+<script src="js.js"></script>
+</body>
+</html>
